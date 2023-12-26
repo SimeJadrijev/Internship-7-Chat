@@ -12,6 +12,6 @@ namespace Data.Entities.Models
         public string GroupName { get; set; }   
         public int UserCreatorID { get; set; }
         public User User { get; set; } = null!;
-        public List<GroupMessage> GroupMessages { get; set; }
+        public ICollection<GroupMessage> GroupMessages { get; set; }
     }
 }

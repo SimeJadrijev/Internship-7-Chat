@@ -14,9 +14,9 @@ namespace Data.Entities.Models
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
 
-        public List<Group> Groups { get; set; }
-        public List<GroupMessage> SentGroupMessages { get; set; }
-        public List<PrivateMessage> SentPrivateMessages { get; set; }
-        public List<PrivateMessage> ReceivedPrivateMessages { get; set; }
+        public ICollection<Group> Groups { get; set; }
+        public ICollection<GroupMessage> SentGroupMessages { get; set; }
+        public ICollection<PrivateMessage> SentPrivateMessages { get; set; }
+        public ICollection<PrivateMessage> ReceivedPrivateMessages { get; set; }
     }
 }

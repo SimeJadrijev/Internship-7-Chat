@@ -1,5 +1,7 @@
 ﻿using Data.Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +57,28 @@ namespace Data.Entities
 
 
             base.OnModelCreating(modelBuilder);
+        }
+    }
+
+
+    public class ChatAppDbContextFactory : IDesignTimeDbContextFactory<ChatAppDbContext>
+    {
+        public ChatAppDbContext CreateDbContext(string[] args)
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddXmlFile("App.config")
+                .Build();
+
+            config.Providers
+                .First()
+                .TryGet("ConnectionStrings:add:ChatApp:connectionString", out var connectionString);
+
+            var options = new DbContextOptionsBuilder<ChatAppDbContext>()
+                .UseNpgsql(connectionString)
+                .Options;
+
+            return new ChatAppDbContext(options);
         }
     }
 }
