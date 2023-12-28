@@ -22,6 +22,7 @@ namespace Data.Entities
         public DbSet<Group> Groups => Set<Group>();
         public DbSet<GroupMessage> GroupMessages => Set<GroupMessage>();
         public DbSet<PrivateMessage> PrivateMessages => Set<PrivateMessage>();
+        public DbSet<GroupUser> GroupUsers => Set<GroupUser>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,6 +56,20 @@ namespace Data.Entities
             .HasForeignKey(pm => pm.UserReceiverID)
             .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<GroupUser>()
+           .HasKey(gu => new { gu.UserID, gu.GroupID }); 
+
+            modelBuilder.Entity<GroupUser>()
+                .HasOne(gu => gu.User)
+                .WithMany(u => u.GroupUsers)
+                .HasForeignKey(gu => gu.UserID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<GroupUser>()
+                .HasOne(gu => gu.Group)
+                .WithMany(g => g.GroupUsers)
+                .HasForeignKey(gu => gu.GroupID)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

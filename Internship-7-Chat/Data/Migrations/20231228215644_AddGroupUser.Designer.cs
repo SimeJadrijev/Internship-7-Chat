@@ -3,6 +3,7 @@ using System;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(ChatAppDbContext))]
-    partial class ChatAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231228215644_AddGroupUser")]
+    partial class AddGroupUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,21 +75,6 @@ namespace Data.Migrations
                     b.HasIndex("UserSenderID");
 
                     b.ToTable("GroupMessages");
-                });
-
-            modelBuilder.Entity("Data.Entities.Models.GroupUser", b =>
-                {
-                    b.Property<int>("UserID")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("GroupID")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserID", "GroupID");
-
-                    b.HasIndex("GroupID");
-
-                    b.ToTable("GroupUsers");
                 });
 
             modelBuilder.Entity("Data.Entities.Models.PrivateMessage", b =>
@@ -177,25 +165,6 @@ namespace Data.Migrations
                     b.Navigation("UserSender");
                 });
 
-            modelBuilder.Entity("Data.Entities.Models.GroupUser", b =>
-                {
-                    b.HasOne("Data.Entities.Models.Group", "Group")
-                        .WithMany("GroupUsers")
-                        .HasForeignKey("GroupID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.Models.User", "User")
-                        .WithMany("GroupUsers")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Data.Entities.Models.PrivateMessage", b =>
                 {
                     b.HasOne("Data.Entities.Models.User", "UserReceiver")
@@ -218,14 +187,10 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.Models.Group", b =>
                 {
                     b.Navigation("GroupMessages");
-
-                    b.Navigation("GroupUsers");
                 });
 
             modelBuilder.Entity("Data.Entities.Models.User", b =>
                 {
-                    b.Navigation("GroupUsers");
-
                     b.Navigation("Groups");
 
                     b.Navigation("ReceivedPrivateMessages");

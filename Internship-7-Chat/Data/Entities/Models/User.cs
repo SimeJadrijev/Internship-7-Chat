@@ -21,6 +21,7 @@ namespace Data.Entities.Models
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
 
+        public ICollection<GroupUser> GroupUsers { get; set; } = new List<GroupUser>();
         public ICollection<Group> Groups { get; set; } = new List<Group>();
         public ICollection<GroupMessage> SentGroupMessages { get; set; } = new List<GroupMessage>();
         public ICollection<PrivateMessage> SentPrivateMessages { get; set; } = new List<PrivateMessage>();
