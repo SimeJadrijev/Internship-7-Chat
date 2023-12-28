@@ -8,6 +8,10 @@ namespace Data.Entities.Models
 {
     public class Group
     {
+        public Group(string groupName)
+        {
+            GroupName = groupName;
+        }
         public int GroupID { get; set; }
         public string GroupName { get; set; }   
         public int UserCreatorID { get; set; }

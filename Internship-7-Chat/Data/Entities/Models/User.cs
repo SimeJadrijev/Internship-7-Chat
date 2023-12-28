@@ -8,6 +8,13 @@ namespace Data.Entities.Models
 {
     public class User
     {
+        public User(string username, string email, string password, bool isAdmin)
+        {
+            Username = username;
+            Email = email;
+            Password = password;
+            IsAdmin = isAdmin;
+        }
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }

@@ -8,6 +8,13 @@ namespace Data.Entities.Models
 {
     public class PrivateMessage
     {
+        public PrivateMessage(string content, DateTime messageTime, int userReceiverID, int userSenderID)
+        {
+            Content = content;
+            MessageTime = messageTime;
+            UserReceiverID = userReceiverID;
+            UserSenderID = userSenderID;
+        }
         public int PrivateMessageID { get; set; }
         public int UserSenderID { get; set; }
         public int UserReceiverID { get; set; }
