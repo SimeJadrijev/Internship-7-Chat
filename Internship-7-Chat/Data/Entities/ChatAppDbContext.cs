@@ -1,4 +1,5 @@
 ﻿using Data.Entities.Models;
+using Data.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -70,7 +71,7 @@ namespace Data.Entities
                 .WithMany(g => g.GroupUsers)
                 .HasForeignKey(gu => gu.GroupID)
                 .OnDelete(DeleteBehavior.Cascade);
-
+            DatabaseSeeder.Seed(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
     }
