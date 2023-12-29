@@ -176,10 +176,32 @@ namespace Data.Seeds
                 .HasData(new List<PrivateMessage>
                 {
                     new PrivateMessage("Pozdrav Marine, Sime je.", new DateTime(2023, 12, 26, 12, 12, 0), 6, 1),
-                    new PrivateMessage("Pozdrav Luka, Sime je.", new DateTime(2023, 12, 27, 11, 12, 0), 8, 1),
-                    new PrivateMessage("Pozdrav Cristiano, Luka je.", new DateTime(2023, 12, 26, 12, 12, 0), 11, 8),
-                    new PrivateMessage("Pozdrav KD, Punter je.", new DateTime(2023, 12, 28, 10, 15, 0), 10, 3)
+                    new PrivateMessage("Pozdrav Sime! Kako si?", new DateTime(2023, 12, 26, 12, 14, 0), 1, 6),
+                    new PrivateMessage("Odlicno, upravo gledam tvoj prosli mec.", new DateTime(2023, 12, 26, 12, 15, 0), 6, 1),
+                    new PrivateMessage("Super, ja upravo koristim tvoju aplikaciju. Pozdrav, Marin.", new DateTime(2023, 12, 26, 12, 16, 0), 1, 6),
 
+                    new PrivateMessage("Pozdrav Luka, Sime je.", new DateTime(2023, 12, 27, 11, 12, 0), 8, 1),
+                    new PrivateMessage("Bok Sime, ne mogu sad razgovarat, spremam se za utakmicu.", new DateTime(2023, 12, 27, 11, 12, 0), 1, 8),
+                    new PrivateMessage("U redu, cujemo se drugom prilikom.", new DateTime(2023, 12, 27, 11, 15, 0), 8, 1),
+
+
+                    new PrivateMessage("Pozdrav Cristiano, Luka je.", new DateTime(2023, 12, 26, 12, 12, 0), 11, 8),
+                    new PrivateMessage("Bok Luka, cestitam na prinovi.", new DateTime(2023, 12, 26, 12, 13, 0), 8, 11),
+                    new PrivateMessage("Hvala ti! Kako je u novom klubu?", new DateTime(2023, 12, 26, 12, 14, 0), 11, 8),
+                    new PrivateMessage("Sve je odlicno, hvala na pitanju!", new DateTime(2023, 12, 26, 12, 15, 0), 8, 11),
+                    new PrivateMessage("Kad dolazis u Europu?", new DateTime(2023, 12, 26, 12, 16, 0), 8, 11),
+                    new PrivateMessage("Na ljeto dolazim u Portugal pa se mozemo vidjeti. ", new DateTime(2023, 12, 26, 12, 17, 0), 11, 8),
+                    new PrivateMessage("Dogovoreno, vidimo se!", new DateTime(2023, 12, 26, 12, 20, 0), 8, 11),
+
+                    new PrivateMessage("Pozdrav KD, Punter je.", new DateTime(2023, 12, 28, 10, 15, 0), 10, 3),
+                    new PrivateMessage("Bok, kako ti mogu pomoci?", new DateTime(2023, 12, 28, 10, 15, 30), 3, 10),
+                    new PrivateMessage("Dolazim u Phoenix za 2 dana, mozes li sredit kartu za utakmicu?", new DateTime(2023, 12, 28, 10, 16, 0), 10, 3),
+                    new PrivateMessage("Naravno, poslat cu ti court side ulaznice preko menadzera. Vidimo se!", new DateTime(2023, 12, 28, 10, 18, 30), 3, 10),
+
+                    new PrivateMessage("Pozdrav Livaja, mozes li mi sredit neki transfer u Hajduk?", new DateTime(2023, 12, 29, 12, 11, 0), 2, 12),
+                    new PrivateMessage("Nema problema Mbappe, ali broj 10 je zauzet.", new DateTime(2023, 12, 29, 12, 12, 0), 12, 2),
+                    new PrivateMessage("Znam tko je glavni u Splitu tako da nema problema. Igrat cu na krilu.", new DateTime(2023, 12, 29, 12, 14, 0), 2, 12),
+                    new PrivateMessage("Onda u redu, spojit cu te s Luksom.", new DateTime(2023, 12, 29, 12, 18, 0), 12, 2),
 
 
                 });
