@@ -1,5 +1,6 @@
 ﻿using Presentation.Actions;
 using Presentation.Helpers;
+using Presentation.MenuOptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,7 @@ namespace Presentation.Authentication
             if ( ConfirmCaptcha() )
                 UsersActions.RegisterUser(NewUsername, NewEmail, NewPassword);
             Reader.PressAnyKeyToContinue();
+            Program.OpenOpeningMenu();
         }
 
         public static bool PasswordsMatch (string password, string confirmationPassword)
