@@ -8,6 +8,7 @@ namespace Data.Entities.Models
 {
     public class User
     {
+        public User() { }
         public User(string username, string email, string password, bool isAdmin)
         {
             Username = username;
