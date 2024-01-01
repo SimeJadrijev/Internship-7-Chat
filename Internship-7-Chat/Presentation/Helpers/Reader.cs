@@ -49,6 +49,11 @@ namespace Presentation.Helpers
                     return input;
             }
         }
+        public static void PressAnyKeyToContinue()
+        {
+            Console.WriteLine("Pritisnite bilo koju tipku za nastavak...");
+            Console.ReadKey();
+        }
 
     }
 }

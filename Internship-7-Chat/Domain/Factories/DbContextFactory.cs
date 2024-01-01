@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Data.Factories
 {
-    public class DbContextFactory
+    public static class DbContextFactory
     {
         public static ChatAppDbContext GetChatAppDbContext()
         {
             var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(FindProjectRoot(AppContext.BaseDirectory))
                 .AddXmlFile("App.config")
                 .Build();
 
@@ -22,7 +22,6 @@ namespace Data.Factories
                 .First()
                 .TryGet("ConnectionStrings:add:ChatApp:connectionString", out var connectionString);
 
-            Console.WriteLine(connectionString);
             var options = new DbContextOptionsBuilder<ChatAppDbContext>()
                 .UseNpgsql(connectionString)
                 .Options;

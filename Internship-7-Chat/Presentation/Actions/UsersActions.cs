@@ -19,9 +19,7 @@ namespace Presentation.Actions
             var responseResult = _userRepository.Add(newUser);
 
             if (responseResult == Domain.Enums.ResponseResultType.Success)
-                Console.WriteLine($"User {username} registered successfully! \n");
-            else
-                Console.WriteLine($"Failed to register user {username}!");
+                Console.WriteLine($"Korisnik {username} je uspješno registriran! \n");
             
         }
 
@@ -29,11 +27,9 @@ namespace Presentation.Actions
         {
             var responseResult = _userRepository.Delete(id);
             if(responseResult == Domain.Enums.ResponseResultType.Success)
-                Console.WriteLine($"User (ID: {id}) deleted successfully!");
+                Console.WriteLine($"Korisnik (ID: {id}) je uspješno izbrisan!");
             else
-                Console.WriteLine($"Failed to delete the user (ID: {id}).");
-
-            
+                Console.WriteLine($"Neuspjeh prilikom pokušaja brisanja korisnika (ID: {id}).");           
         }
 
         public static bool CheckIfEmailAlreadyExists(string email)

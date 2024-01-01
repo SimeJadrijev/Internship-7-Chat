@@ -45,6 +45,7 @@ namespace Presentation.Authentication
             //CAPTCHA validation:
             if ( ConfirmCaptcha() )
                 UsersActions.RegisterUser(NewUsername, NewEmail, NewPassword);
+            Reader.PressAnyKeyToContinue();
         }
 
         public static bool PasswordsMatch (string password, string confirmationPassword)
@@ -52,7 +53,7 @@ namespace Presentation.Authentication
             if (password == confirmationPassword)
                 return true;
 
-            Console.WriteLine("Lozinke se ne podudaraju!");
+            Console.WriteLine("\nLozinke se ne podudaraju! \n");
             return false;
         }
 
@@ -76,14 +77,14 @@ namespace Presentation.Authentication
 
         public static bool ConfirmCaptcha ()
         {
-            Console.WriteLine("CAPTCHA potvrda da niste robot \n");
+            Console.WriteLine("\nCAPTCHA potvrda da niste robot \n");
 
             var randomCaptcha = GenerateRandomCaptcha();
-            Console.WriteLine("Molimo unesete isti ovaj kod: " + randomCaptcha);
+            Console.WriteLine("CAPTCHA KOD: " + randomCaptcha + "\n");
             
             while (true)
             {
-                Reader.ReadInput(Console.ReadLine(), out var userInput);
+                Reader.ReadInput("Molimo unesite generirani Captcha kod: ", out var userInput);
 
                 if (userInput == randomCaptcha)
                     break;
