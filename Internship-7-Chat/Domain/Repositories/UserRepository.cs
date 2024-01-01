@@ -47,6 +47,7 @@ namespace Domain.Repositories
         }
 
         public User? GetById(int id) => DbContext.Users.FirstOrDefault(u => u.UserID == id);
+        public User? GetbyEmail(string email) => DbContext.Users.FirstOrDefault(u => u.Email == email);
         public ICollection<User> GetAll() => DbContext.Users.ToList();
     }
 }
