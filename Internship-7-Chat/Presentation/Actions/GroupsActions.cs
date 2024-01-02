@@ -21,11 +21,26 @@ namespace Presentation.Actions
                 UserCreatorID = userCreatorID
             };
 
+            newGroupChannel.GroupUsers.Add(new GroupUser { UserID = userCreatorID });
+
             var responseResult = _groupRepository.Add(newGroupChannel);
             if (responseResult == ResponseResultType.Success)
                 Console.WriteLine("Uspješno ste kreirali grupni kanal: " + groupName);
 
             return newGroupChannel.GroupID;
+        }
+
+        public static List<Group>? GetNewGroups(User user)
+        {
+            var newGroups = _groupRepository.GetNewGroups(user);
+
+            if(newGroups is null)
+            {
+                Console.WriteLine("Nema novih grupnih kanala!");
+                return null;
+            }
+
+            return newGroups;
         }
     }
 }

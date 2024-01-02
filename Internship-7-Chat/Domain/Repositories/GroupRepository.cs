@@ -49,6 +49,16 @@ namespace Domain.Repositories
             return SaveChanges();
         }
 
+        public List<Group>? GetNewGroups(User user)
+        {
+            var newGroups = DbContext.Groups.Where(g => !g.GroupUsers.Any(gu => gu.UserID == user.UserID)).ToList();
+
+            if (newGroups is null)
+                return null;
+
+            return newGroups;
+        }
+
         public Group? GetById(int id) => DbContext.Groups.FirstOrDefault(g => g.GroupID == id);
         public ICollection<Group> GetAll() => DbContext.Groups.ToList();
 
