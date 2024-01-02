@@ -42,6 +42,15 @@ namespace Presentation.Actions
             return false; //The email address is unique, allow the registration
         }
 
+        public static User? GetUserByEmail(string email)
+        {
+            var user = _userRepository.GetbyEmail(email);
+
+            if (user is null)
+                Console.WriteLine("Korisnik s unesenom email adresom nije registriran!");
+
+            return user;
+        }
         
     }
 }

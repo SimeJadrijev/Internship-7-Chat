@@ -22,7 +22,7 @@ class Program
             ("Prijava već postojećeg korisnika", () => OpenLoginForm()),
             ("Izlaz iz aplikacije", () => Environment.Exit(0))
         };
-        var menu = new Menu("OpeningMenu", openingMenuOptions);
+        var menu = new Menu("Početni Menu", openingMenuOptions);
         menu.Execute();
     }
 
@@ -33,6 +33,6 @@ class Program
 
     static void OpenLoginForm()
     {
-        // 
+        new LoginForm();
     }
 }

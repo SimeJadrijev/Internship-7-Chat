@@ -18,7 +18,7 @@ namespace Presentation.Authentication
         public RegistrationForm() 
         {
             Console.Clear();
-            Console.WriteLine("--- Registration Form ---");
+            Console.WriteLine("--- Registracija korisnika ---");
 
             // Username:
             Reader.ReadInput("Unesite korisničko ime: ", out var username);
