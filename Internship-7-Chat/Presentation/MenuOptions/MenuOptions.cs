@@ -26,7 +26,7 @@ namespace Presentation.MenuOptions
             {
                 ("Kreiranje novog grupnog kanala", () => GroupChannelMenu.CreateGroupChannel(User) ),
                 ("Ulazak u grupni kanal", () => GroupChannelMenu.JoinGroupChannel(User) ),
-                ("Ispis svih grupnih", () => Console.WriteLine("Work in progress...")),
+                ("Ispis svih grupnih kanala", () => GroupChannelMenu.GetMyGroupChannels(User)),
                 ("Povratak na prethodni Menu", () => returnToRegularMenu.OpenRegularMenu(User))
             };
 

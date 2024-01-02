@@ -1,10 +1,12 @@
 ﻿using Data.Entities.Models;
 using Domain.Enums;
 using Domain.Repositories;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Query.ExpressionTranslators.Internal;
 using Presentation.Actions;
 using Presentation.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +43,7 @@ namespace Presentation.MenuOptions
 
                 Console.WriteLine();
 
-                Reader.ReadInput("Unesi ime grupnog kanala kojem se želite pridružiti: ", out var groupForJoin);
+                Reader.ReadInput("Unesi ime grupnog kanala kojem se želite pridružiti (za izlaz unijeti bilo šta drugo): ", out var groupForJoin);
 
                 var selectedGroup = newGroups.FirstOrDefault(g => g.GroupName.Equals(groupForJoin, StringComparison.OrdinalIgnoreCase));
 
@@ -68,6 +70,41 @@ namespace Presentation.MenuOptions
 
             var menu = new Menu("Grupni kanali", groupChatOptions);
             menu.Execute();
+        }
+
+        public static void GetMyGroupChannels(User user)
+        {
+            Console.Clear();
+
+            var myGroups = GroupsActions.GetMyGroups(user);
+
+            if (myGroups is not null)
+            {
+                foreach (var group in myGroups)
+                    Console.WriteLine("   " + group.GroupName);
+
+                Console.WriteLine();
+
+                Reader.ReadInput("Unesite ime grupnog kanala koji želite pregledati (za izlaz unijeti bilo šta drugo): ", out var groupForView);
+                var selectedGroup = myGroups.FirstOrDefault(g => g.GroupName.Equals(groupForView, StringComparison.OrdinalIgnoreCase));
+
+                if (selectedGroup is null)
+                {
+                    Console.WriteLine("Grupni kanal s tim imenom ne postoji!");
+                    Reader.PressAnyKeyToContinue();
+                    BackToGroupChannelMenu(user, true);
+                }
+                else
+                {
+                    Console.Clear();
+                    EnterGroupChat(user);
+                }
+            }
+        }
+
+        public static void EnterGroupChat(User user)
+        {
+            Console.WriteLine("work in progress...");
         }
 
 

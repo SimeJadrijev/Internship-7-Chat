@@ -42,5 +42,18 @@ namespace Presentation.Actions
 
             return newGroups;
         }
+
+        public static List<Group>? GetMyGroups (User user)
+        {
+            var myGroups = _groupRepository.GetMyGroups(user);
+
+            if (myGroups is null)
+            {
+                Console.WriteLine("Niste član nijednog grupnog kanala!");
+                return null;
+            }
+
+            return myGroups;
+        }
     }
 }
