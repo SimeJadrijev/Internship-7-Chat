@@ -20,8 +20,8 @@ namespace Presentation.MenuOptions
         {
             var options = new List<(string, Action)>()
             {
-                ("Kreiranje novog grupnog chata", () => Console.WriteLine("Work in progress...")),
-                ("Ulazak u grupni chat", () => Console.WriteLine("Work in progress...")),
+                ("Kreiranje novog grupnog kanala", () => GroupChannelMenu.CreateGroupChannel(User) ),
+                ("Ulazak u grupni kanal", () => Console.WriteLine("Work in progress...")),
                 ("Ispis svih grupnih", () => Console.WriteLine("Work in progress...")),
                 ("Povratak na prethodni Menu", () => Console.WriteLine("Work in progress..."))
 

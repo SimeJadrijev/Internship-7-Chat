@@ -10,8 +10,17 @@ namespace Presentation.Helpers
     {
         public static void ReadInput (string message, out string input)
         {
-            Console.Write(message);
-            input = Console.ReadLine() ?? string.Empty;
+            do
+            {
+                Console.Write(message);
+                input = Console.ReadLine() ?? string.Empty;
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Morate unijeti nešto. Pokušajte ponovno.\n");
+                }
+            } while (string.IsNullOrEmpty(input));
+            
         }
 
         public static bool IsValidEmail (string email)

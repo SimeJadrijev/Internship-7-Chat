@@ -46,7 +46,8 @@ namespace Presentation.MenuOptions
             {
                 if (SelectedOption == i)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($" {i + 1}. {Options[i].Item1}");
 
                     Console.ResetColor();
