@@ -32,7 +32,7 @@ namespace Presentation.MenuOptions
                 if (u.UserID == user.UserID)
                     continue;
 
-                (string, Action) line = (u.Username, () => Console.WriteLine());
+                (string, Action) line = (u.Username, () => ShowPrivateChatWithUser(user, u));
                 allUsersItems.Add(line);
 
                 //Console.WriteLine($"ID: {u.UserID}  Korisnik: {u.Username}");
@@ -40,6 +40,26 @@ namespace Presentation.MenuOptions
 
             var allUsersMenu = new Menu("Uđite u korisnika kojem želite poslati poruku.", allUsersItems);
             allUsersMenu.Execute();            
+        }
+
+        public static void ShowPrivateChatWithUser(User userSender, User userReceiver)
+        {
+            Console.Clear();
+            var privateMessages = PrivateMessagesActions.ShowMessagesFromThisChannel(userSender.UserID, userReceiver.UserID);
+
+            if (privateMessages is null)
+                Reader.PressAnyKeyToContinue();
+            else
+            {
+                foreach (var message in privateMessages)
+                {
+                    Console.WriteLine($"{message.UserSender.Username}  -  {message.MessageTime} \n" +
+                                      $"{message.Content} \n");
+                }
+                Reader.PressAnyKeyToContinue();
+            }
+
+
         }
     }
 }

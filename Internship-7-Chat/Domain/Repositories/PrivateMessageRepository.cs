@@ -1,6 +1,7 @@
 ﻿using Data.Entities;
 using Data.Entities.Models;
 using Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,22 @@ namespace Domain.Repositories
 
             return SaveChanges();
         }
+        public List<PrivateMessage> GetGroupMessagesFromThisChannel(int userSender, int userReceiver)
+        {
+            var privateMessages = DbContext.PrivateMessages
+                                .Where(pm => (pm.UserReceiverID == userReceiver && pm.UserSenderID == userSender)
+                                              || (pm.UserReceiverID == userSender && pm.UserSenderID == userReceiver))
+                                .OrderBy(pm => pm.MessageTime)
+                                .Include(pm => pm.UserSender)
+                                .Include(pm => pm.UserReceiver)
+                                .ToList();
 
+            if (privateMessages is null)
+                return null;
+
+            return privateMessages;
+
+        }
         public PrivateMessage? GetById(int id) => DbContext.PrivateMessages.FirstOrDefault(pm => pm.PrivateMessageID == id);
         public ICollection<PrivateMessage> GetAll() => DbContext.PrivateMessages.ToList();
     }
