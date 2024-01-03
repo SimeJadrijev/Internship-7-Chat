@@ -4,6 +4,7 @@ using Presentation.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -90,5 +91,32 @@ namespace Presentation.MenuOptions
 
             }
         }
+
+        public static void ShowAllPrivateConversations (User user)
+        {
+            var usersWithPrivateMessages = PrivateMessagesActions.ShowAllPrivateConversations(user.UserID);
+
+            if (usersWithPrivateMessages is null)
+                Reader.PressAnyKeyToContinue();
+            else
+            {
+                var allUsersItems = new List<(string, Action)>();
+
+                foreach (var u in usersWithPrivateMessages)
+                {
+                    if (u.UserID == user.UserID)
+                        continue;
+                    (string, Action) line = (u.Username, () => ShowPrivateChatWithUser(user, u));
+                    allUsersItems.Add(line);
+                }
+
+
+                var allUsersMenu = new Menu("Uđite u korisnika kojem želite poslati poruku.", allUsersItems);
+                allUsersMenu.Execute();
+
+            }
+        }
+
+
     }
 }

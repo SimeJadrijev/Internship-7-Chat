@@ -40,7 +40,7 @@ namespace Presentation.MenuOptions
             var options = new List<(string, Action)>()
             {
                 ("Nova poruka", () => PrivateChatsMenu.NewPrivateMessage(User) ),
-                ("Ispis svih privatnih poruka", () => Console.WriteLine("Work in progress...")),
+                ("Ispis svih privatnih poruka", () => PrivateChatsMenu.ShowAllPrivateConversations(User) ),
                 ("Povratak na prethodni Menu", () => returnToRegularMenu.OpenRegularMenu(User))
 
             };

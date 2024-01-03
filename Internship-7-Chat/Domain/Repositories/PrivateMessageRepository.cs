@@ -63,6 +63,25 @@ namespace Domain.Repositories
             return privateMessages;
 
         }
+
+        public List<User> ShowAllPrivateConversations (int userID)
+        {
+            var usersWithPrivateMessages = DbContext.PrivateMessages
+                                    .Where(pm => (pm.UserSenderID == userID || pm.UserReceiverID == userID) && pm.UserSenderID != pm.UserReceiverID)
+                                    .OrderBy(pm => pm.MessageTime)
+                                    .Include(pm => pm.UserSender)
+                                    .Include(pm => pm.UserReceiver)
+                                    .AsEnumerable()
+                                    .SelectMany(pm => new[] { pm.UserSender, pm.UserReceiver })
+                                    .Distinct()
+                                    .ToList();
+
+            if (usersWithPrivateMessages is null)
+                return null;
+
+            return usersWithPrivateMessages;
+
+        }
         public PrivateMessage? GetById(int id) => DbContext.PrivateMessages.FirstOrDefault(pm => pm.PrivateMessageID == id);
         public ICollection<PrivateMessage> GetAll() => DbContext.PrivateMessages.ToList();
     }

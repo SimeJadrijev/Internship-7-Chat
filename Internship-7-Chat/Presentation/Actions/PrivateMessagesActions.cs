@@ -39,5 +39,18 @@ namespace Presentation.Actions
                 return null;
             }
         }
+
+        public static List<User> ShowAllPrivateConversations (int userID)
+        {
+            var usersWithPrivateMessages = _privateMessageRepository.ShowAllPrivateConversations(userID);
+
+            if (usersWithPrivateMessages is null)
+            {
+                Console.WriteLine("Nema privatnih poruka!");
+                return null;
+            }
+
+            return usersWithPrivateMessages;
+        }
     }
 }
