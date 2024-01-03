@@ -47,10 +47,27 @@ namespace Presentation.Actions
             var user = _userRepository.GetbyEmail(email);
 
             if (user is null)
+            {
                 Console.WriteLine("Korisnik s unesenom email adresom nije registriran!");
+                return null;
+
+            }
 
             return user;
         }
         
+        public static ICollection<User> GetAllUsers()
+        {
+            var allUsers = _userRepository.GetAll();
+            
+            if (allUsers is null)
+            {
+                Console.WriteLine("Ne postoji nijedan korisnik u aplikaciji.");
+                return null;
+            }
+
+            return allUsers;
+
+        }
     }
 }

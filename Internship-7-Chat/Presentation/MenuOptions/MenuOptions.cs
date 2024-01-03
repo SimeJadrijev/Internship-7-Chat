@@ -37,7 +37,7 @@ namespace Presentation.MenuOptions
         {
             var options = new List<(string, Action)>()
             {
-                ("Nova poruka", () => Console.WriteLine("Work in progress...")),
+                ("Nova poruka", () => PrivateChatsMenu.NewPrivateMessage(User) ),
                 ("Ispis svih privatnih poruka", () => Console.WriteLine("Work in progress...")),
                 ("Povratak na prethodni Menu", () => Console.WriteLine("Work in progress..."))
 
