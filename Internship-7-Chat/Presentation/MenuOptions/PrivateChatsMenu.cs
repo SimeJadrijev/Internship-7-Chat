@@ -39,7 +39,7 @@ namespace Presentation.MenuOptions
             }
 
             var allUsersMenu = new Menu("Uđite u korisnika kojem želite poslati poruku.", allUsersItems);
-            allUsersMenu.Execute();            
+            allUsersMenu.Execute();
         }
 
         public static void ShowPrivateChatWithUser(User userSender, User userReceiver)
@@ -69,10 +69,26 @@ namespace Presentation.MenuOptions
         public static void SendPrivateMessage(User userSender, User userReceiver)
         {
             Reader.ReadInput("Unesite vašu poruku: ", out var messageContent);
+
+            if (messageContent.ToLower() == "/exit")
+                BackToPrivateChatsMenu(userSender);
+
             var newPrivateMessage = PrivateMessagesActions.SendPrivateMessage(messageContent, userSender.UserID, userReceiver.UserID);
 
             if (newPrivateMessage is not null)
                 Console.WriteLine("Poruka uspješno poslana!");
+        }
+
+        public static void BackToPrivateChatsMenu(User user)
+        {
+            {
+                var menuOptions = new MenuOptions(user);
+                var privateChatOptions = menuOptions.PrivateMessageOptions();
+
+                var menu = new Menu("Privatne poruke", privateChatOptions);
+                menu.Execute();
+
+            }
         }
     }
 }

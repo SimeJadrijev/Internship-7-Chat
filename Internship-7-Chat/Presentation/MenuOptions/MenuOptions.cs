@@ -35,11 +35,13 @@ namespace Presentation.MenuOptions
 
         public List<(string, Action)> PrivateMessageOptions()
         {
+            var returnToRegularMenu = new LoginForm(true); //auxiliary variable
+
             var options = new List<(string, Action)>()
             {
                 ("Nova poruka", () => PrivateChatsMenu.NewPrivateMessage(User) ),
                 ("Ispis svih privatnih poruka", () => Console.WriteLine("Work in progress...")),
-                ("Povratak na prethodni Menu", () => Console.WriteLine("Work in progress..."))
+                ("Povratak na prethodni Menu", () => returnToRegularMenu.OpenRegularMenu(User))
 
             };
 
