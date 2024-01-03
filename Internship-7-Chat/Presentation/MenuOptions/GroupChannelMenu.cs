@@ -33,6 +33,7 @@ namespace Presentation.MenuOptions
         public static void JoinGroupChannel (User user)
         {
             Console.Clear();
+            Console.WriteLine("--- ULAZAK U GRUPNI KANAL --- \n");
 
             var newGroups = GroupsActions.GetNewGroups(user);
             
@@ -75,6 +76,7 @@ namespace Presentation.MenuOptions
         public static void GetMyGroupChannels(User user)
         {
             Console.Clear();
+            Console.WriteLine("--- MOJI GRUPNI KANALI --- \n");
 
             var myGroups = GroupsActions.GetMyGroups(user);
 
@@ -97,14 +99,20 @@ namespace Presentation.MenuOptions
                 else
                 {
                     Console.Clear();
-                    EnterGroupChat(user);
+                    EnterGroupChat(user, selectedGroup.GroupID);
                 }
             }
         }
 
-        public static void EnterGroupChat(User user)
+        public static void EnterGroupChat(User user, int groupID)
         {
-            Console.WriteLine("work in progress...");
+            var groupMessages = GroupMessagesActions.ShowMessagesFromThisChannel(groupID);
+
+            foreach (var message in groupMessages)
+                Console.WriteLine($"{message.UserSender.Username}  -  {message.MessageTime} \n" +
+                                  $"{message.Content} \n");
+
+            Reader.PressAnyKeyToContinue();
         }
 
 
