@@ -25,5 +25,20 @@ namespace Presentation.Actions
 
             return groupMessages;
         }
+
+        public static GroupMessage? SendNewGroupMessage(string messageContent, User user, int groupID)
+        {
+            var newMessage = new GroupMessage(messageContent, DateTime.UtcNow, groupID, user.UserID);
+            var responseResult = _groupMessageRepository.Add(newMessage);
+                
+            if (responseResult == Domain.Enums.ResponseResultType.Success)
+                return newMessage;
+            else
+            {
+                Console.WriteLine("Greška!");
+                return null;
+            }
+        }
     }
 }
+

@@ -61,7 +61,7 @@ namespace Domain.Repositories
             var groupMessages = DbContext.GroupMessages
                                 .Where(gm => gm.GroupID == groupID)
                                 .Include(gm => gm.UserSender)
-                                .OrderByDescending(gm => gm.MessageTime)
+                                .OrderBy(gm => gm.MessageTime)
                                 .ToList();
 
             if (groupMessages is null)

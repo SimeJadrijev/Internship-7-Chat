@@ -64,5 +64,16 @@ namespace Presentation.Helpers
             Console.ReadKey();
         }
 
+        public static bool TryReadInt(string message, out int number)
+        {
+            Console.Write(message);
+            number = 0;
+            var isNumber = int.TryParse(Console.ReadLine(), out var inputNumber);
+            if (!isNumber)
+                return false;
+
+            number = inputNumber;
+            return true;
+        }
     }
 }

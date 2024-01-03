@@ -83,16 +83,22 @@ namespace Presentation.MenuOptions
             if (myGroups is not null)
             {
                 foreach (var group in myGroups)
-                    Console.WriteLine("   " + group.GroupName);
+                    Console.WriteLine("   " + group.GroupID + " - " + group.GroupName);
 
                 Console.WriteLine();
 
-                Reader.ReadInput("Unesite ime grupnog kanala koji želite pregledati (za izlaz unijeti bilo šta drugo): ", out var groupForView);
-                var selectedGroup = myGroups.FirstOrDefault(g => g.GroupName.Equals(groupForView, StringComparison.OrdinalIgnoreCase));
+                Reader.TryReadInt("Unesite ID grupe koju želite pregledati (za izlaz unijeti bilo šta drugo): ", out var groupForView);
+                if (groupForView == 0)
+                    BackToGroupChannelMenu(user, true);
+                
+                var selectedGroup = myGroups.FirstOrDefault(g => g.GroupID == groupForView);
+
+                //Reader.ReadInput("Unesite ime grupnog kanala koji želite pregledati (za izlaz unijeti bilo šta drugo): ", out var groupForView);
+                //var selectedGroup = myGroups.FirstOrDefault(g => g.GroupName.Equals(groupForView, StringComparison.OrdinalIgnoreCase));
 
                 if (selectedGroup is null)
                 {
-                    Console.WriteLine("Grupni kanal s tim imenom ne postoji!");
+                    Console.WriteLine("Grupni kanal s tim ID ne postoji!");
                     Reader.PressAnyKeyToContinue();
                     BackToGroupChannelMenu(user, true);
                 }
@@ -115,10 +121,28 @@ namespace Presentation.MenuOptions
                     Console.WriteLine($"{message.UserSender.Username}  -  {message.MessageTime} \n" +
                                       $"{message.Content} \n");
 
+            Reader.ReadInput("Unesite vašu poruku: ", out var messageContent);
+
+            if (messageContent.ToLower() == "/exit")
+                BackToGroupChannelMenu(user, true);
+            else
+            {
+                SendNewGroupMessage(messageContent, user, groupID);
+                Reader.PressAnyKeyToContinue();
+                Console.Clear();
+                EnterGroupChat(user, groupID);
+            }
+
             Reader.PressAnyKeyToContinue();
+
         }
 
-
+        public static void SendNewGroupMessage(string messageContent, User user, int groupID)
+        {
+            var newMessage = GroupMessagesActions.SendNewGroupMessage(messageContent, user, groupID);
+            if (newMessage is not null)
+                Console.WriteLine("Poruka uspješno poslana!");
+        }
 
     }
 }
