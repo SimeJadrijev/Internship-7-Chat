@@ -22,8 +22,16 @@ namespace Domain.Repositories
             if (group is null)
                 return ResponseResultType.NotFound;
 
+            var existingGroupUser = DbContext.GroupUsers
+                                    .FirstOrDefault(gu => gu.UserID == userID && gu.GroupID == groupID);
+
+            if (existingGroupUser != null)
+                return ResponseResultType.AlreadyExists; 
+
+
             var groupUser = new GroupUser 
-            { UserID = userID,
+            {
+                UserID = userID,
                 GroupID = groupID
             };
 

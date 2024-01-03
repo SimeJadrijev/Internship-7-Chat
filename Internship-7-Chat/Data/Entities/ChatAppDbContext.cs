@@ -91,7 +91,7 @@ namespace Data.Entities
                 .TryGet("ConnectionStrings:add:ChatApp:connectionString", out var connectionString);
 
             var options = new DbContextOptionsBuilder<ChatAppDbContext>()
-                .UseNpgsql(connectionString)
+                .UseNpgsql(connectionString, options => options.EnableRetryOnFailure())
                 .Options;
 
             return new ChatAppDbContext(options);

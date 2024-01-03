@@ -23,7 +23,7 @@ namespace Presentation.MenuOptions
             Reader.ReadInput("Odaberite ime vašeg novog grupnog kanala: ", out var groupChannelName);
             var groupID = GroupsActions.CreateGroupChat(groupChannelName, user.UserID);
 
-            GroupUserActions.Add(user.UserID, groupID);
+            //GroupUserActions.Add(user.UserID, groupID);
             Reader.PressAnyKeyToContinue();
 
             BackToGroupChannelMenu(user, true);
@@ -107,10 +107,13 @@ namespace Presentation.MenuOptions
         public static void EnterGroupChat(User user, int groupID)
         {
             var groupMessages = GroupMessagesActions.ShowMessagesFromThisChannel(groupID);
+            if (groupMessages is null)
+                Reader.PressAnyKeyToContinue();
 
-            foreach (var message in groupMessages)
-                Console.WriteLine($"{message.UserSender.Username}  -  {message.MessageTime} \n" +
-                                  $"{message.Content} \n");
+            else
+                foreach (var message in groupMessages)
+                    Console.WriteLine($"{message.UserSender.Username}  -  {message.MessageTime} \n" +
+                                      $"{message.Content} \n");
 
             Reader.PressAnyKeyToContinue();
         }

@@ -1,6 +1,7 @@
 ﻿using Data.Entities;
 using Data.Entities.Models;
 using Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,23 @@ namespace Domain.Repositories
             return SaveChanges();
         }
 
+        public List<GroupMessage>? GetGroupMessagesFromThisChannel (int groupID)
+        {
+            var selectedGroup = GetById(groupID);
+            if (selectedGroup is null) 
+                return null;
+
+            var groupMessages = DbContext.GroupMessages
+                                .Where(gm => gm.GroupID == groupID)
+                                .Include(gm => gm.UserSender)
+                                .OrderByDescending(gm => gm.MessageTime)
+                                .ToList();
+
+            if (groupMessages is null)
+                return null;
+
+            return groupMessages;
+        }
         public GroupMessage? GetById(int id) => DbContext.GroupMessages.FirstOrDefault(gm => gm.GroupMessageID == id);
         public ICollection<GroupMessage> GetAll() => DbContext.GroupMessages.ToList();
     }
