@@ -1,6 +1,7 @@
 ﻿using Data.Entities;
 using Data.Entities.Models;
 using Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,13 @@ namespace Domain.Repositories
             if (myGroups is null)
                 return null;
             return myGroups;
+        }
+
+        public int GetNumberOfMembersInGroup(int groupID)
+        {
+            var numberOfMembers = DbContext.GroupUsers.Count(gu => gu.GroupID == groupID);
+
+            return numberOfMembers;
         }
 
         public Group? GetById(int id) => DbContext.Groups.FirstOrDefault(g => g.GroupID == id);

@@ -40,7 +40,10 @@ namespace Presentation.MenuOptions
             if (newGroups != null)
             {
                 foreach (var group in newGroups)
-                    Console.WriteLine($"{group.GroupName} --> {group.GroupUsers.Count} članova"); //BROJ CLANOVA NE RADI!!!
+                {
+                    var numberOfMembers = GroupsActions.GetNumberOfMembersInGroup(group.GroupID);
+                    Console.WriteLine($"{group.GroupName} --> {numberOfMembers} članova"); //BROJ CLANOVA NE RADI!!!
+                }
 
                 Console.WriteLine();
 

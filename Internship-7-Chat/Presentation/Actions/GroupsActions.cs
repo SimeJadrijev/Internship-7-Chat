@@ -55,5 +55,12 @@ namespace Presentation.Actions
 
             return myGroups;
         }
+
+        public static int GetNumberOfMembersInGroup(int groupID)
+        {
+            var numberOfMembers = _groupRepository.GetNumberOfMembersInGroup(groupID);
+
+            return numberOfMembers;
+        }
     }
 }

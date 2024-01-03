@@ -39,5 +39,12 @@ namespace Domain.Repositories
 
             return SaveChanges();
         }
+
+        public static int GetNumberOfMembersInGroup(int groupID)
+        {
+            var numberOfMembers = DbContext.GroupUsers.Count(gu => gu.GroupID == groupID);
+
+            return numberOfMembers;
+        }
     }
 }
