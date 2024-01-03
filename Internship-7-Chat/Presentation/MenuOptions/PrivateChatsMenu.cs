@@ -56,10 +56,23 @@ namespace Presentation.MenuOptions
                     Console.WriteLine($"{message.UserSender.Username}  -  {message.MessageTime} \n" +
                                       $"{message.Content} \n");
                 }
+
+                SendPrivateMessage(userSender, userReceiver);
                 Reader.PressAnyKeyToContinue();
+                Console.Clear();
+                ShowPrivateChatWithUser(userSender, userReceiver);
             }
 
 
+        }
+
+        public static void SendPrivateMessage(User userSender, User userReceiver)
+        {
+            Reader.ReadInput("Unesite vašu poruku: ", out var messageContent);
+            var newPrivateMessage = PrivateMessagesActions.SendPrivateMessage(messageContent, userSender.UserID, userReceiver.UserID);
+
+            if (newPrivateMessage is not null)
+                Console.WriteLine("Poruka uspješno poslana!");
         }
     }
 }

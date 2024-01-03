@@ -28,7 +28,7 @@ namespace Presentation.Actions
 
         public static GroupMessage? SendNewGroupMessage(string messageContent, User user, int groupID)
         {
-            var newMessage = new GroupMessage(messageContent, DateTime.UtcNow, groupID, user.UserID);
+            var newMessage = new GroupMessage(messageContent, DateTime.UtcNow.AddHours(1), groupID, user.UserID);
             var responseResult = _groupMessageRepository.Add(newMessage);
                 
             if (responseResult == Domain.Enums.ResponseResultType.Success)

@@ -25,5 +25,19 @@ namespace Presentation.Actions
 
             return privateMessages;
         }
+
+        public static PrivateMessage? SendPrivateMessage(string messageContent, int userSenderID, int userReceiverID)
+        {
+            var newPrivateMessage = new PrivateMessage(messageContent, DateTime.UtcNow.AddHours(1), userReceiverID, userSenderID);
+            var responseResult = _privateMessageRepository.Add(newPrivateMessage);
+
+            if (responseResult == Domain.Enums.ResponseResultType.Success)
+                return newPrivateMessage;
+            else
+            {
+                Console.WriteLine("Greška!");
+                return null;
+            }
+        }
     }
 }
