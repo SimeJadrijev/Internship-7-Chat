@@ -72,18 +72,26 @@ namespace Presentation.Actions
 
         public static User? ChangeEmailAddress(User userForEdit, int userID, string newEmailAddress)
         {
-            userForEdit.Email = newEmailAddress;
-            var responseResult = _userRepository.Update(userForEdit, userID);
-
-            if (responseResult == Domain.Enums.ResponseResultType.Success)
+            if (userForEdit.Email == newEmailAddress)
             {
-                Console.WriteLine("Uspješno izmijenjena email adresa!");
-                return userForEdit;
+                Console.WriteLine("Unijeli ste istu email adresu. Nema promjena!");
+                return null;
             }
             else
             {
-                Console.WriteLine("Greška! Korisniku nije promijenjena email adresa!");
-                return null;
+                userForEdit.Email = newEmailAddress;
+                var responseResult = _userRepository.Update(userForEdit, userID);
+
+                if (responseResult == Domain.Enums.ResponseResultType.Success)
+                {
+                    Console.WriteLine("Uspješno izmijenjena email adresa!");
+                    return userForEdit;
+                }
+                else
+                {
+                    Console.WriteLine("Greška! Korisniku nije promijenjena email adresa!");
+                    return null;
+                }
             }
         }
 
@@ -109,6 +117,24 @@ namespace Presentation.Actions
                     Console.WriteLine("Greška! Korisnik NIJE promoviran u admina!");
                     return null;
                 }
+            }
+        }
+
+        public static User? ChangePassword(User userForEdit, string newPassword)
+        {
+            userForEdit.Password = newPassword;
+
+            var user = _userRepository.Update(userForEdit, userForEdit.UserID);
+
+            if (user == Domain.Enums.ResponseResultType.Success)
+            {
+                Console.WriteLine("Uspješno promijenjena lozinka!");
+                return userForEdit;
+            }
+            else
+            {
+                Console.WriteLine("Greška! Nema promjena!");
+                return null;
             }
         }
     }

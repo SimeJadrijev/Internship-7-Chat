@@ -20,9 +20,12 @@ namespace Presentation.MenuOptions
             Console.Clear();
             Console.WriteLine("--- KREIRANJE NOVOG GRUPNOG KANALA --- \n");
 
-            Reader.ReadInput("Odaberite ime vašeg novog grupnog kanala: ", out var groupChannelName);
-            var groupID = GroupsActions.CreateGroupChat(groupChannelName, user.UserID);
-
+            Reader.ReadInput("Odaberite ime vašeg novog grupnog kanala (/exit za odustajanje): ", out var groupChannelName);
+            
+            if (groupChannelName.ToLower() != "/exit")
+            {
+                var groupID = GroupsActions.CreateGroupChat(groupChannelName, user.UserID);
+            }
             //GroupUserActions.Add(user.UserID, groupID);
             Reader.PressAnyKeyToContinue();
 
@@ -124,7 +127,7 @@ namespace Presentation.MenuOptions
                     Console.WriteLine($"{message.UserSender.Username}  -  {message.MessageTime} \n" +
                                       $"{message.Content} \n");
 
-            Reader.ReadInput("Unesite vašu poruku: ", out var messageContent);
+            Reader.ReadInput("Unesite vašu poruku (/exit za izlaz): ", out var messageContent);
 
             if (messageContent.ToLower() == "/exit")
                 BackToGroupChannelMenu(user, true);

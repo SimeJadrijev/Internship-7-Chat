@@ -1,5 +1,6 @@
 ﻿using Data.Entities.Models;
 using Presentation.Actions;
+using Presentation.Authentication;
 using Presentation.Helpers;
 using System;
 using System.Collections.Generic;
@@ -25,19 +26,26 @@ namespace Presentation.MenuOptions
 
         public static void ShowAllUsers(User user)
         {
+            var returnToRegularMenu = new LoginForm(true);
+
             var allUsers = UsersActions.GetAllUsers();
-
             var allUsersItems = new List<(string, Action)>();
-            foreach (var u in allUsers)
+
+            if (allUsers.Count > 0)
             {
-                if (u.UserID == user.UserID)
-                    continue;
+                foreach (var u in allUsers)
+                {
+                    if (u.UserID == user.UserID)
+                        continue;
 
-                (string, Action) line = (u.Username, () => ShowPrivateChatWithUser(user, u));
-                allUsersItems.Add(line);
+                    (string, Action) line = (u.Username, () => ShowPrivateChatWithUser(user, u));
+                    allUsersItems.Add(line);
 
-                //Console.WriteLine($"ID: {u.UserID}  Korisnik: {u.Username}");
+                    //Console.WriteLine($"ID: {u.UserID}  Korisnik: {u.Username}");
+                }
             }
+            (string, Action) lastLine = ("<-- POVRATAK", () => returnToRegularMenu.OpenRegularMenu(user));
+            allUsersItems.Add(lastLine);
 
             var allUsersMenu = new Menu("Uđite u korisnika kojem želite poslati poruku.", allUsersItems);
             allUsersMenu.Execute();
@@ -69,7 +77,7 @@ namespace Presentation.MenuOptions
 
         public static void SendPrivateMessage(User userSender, User userReceiver)
         {
-            Reader.ReadInput("Unesite vašu poruku: ", out var messageContent);
+            Reader.ReadInput("Unesite vašu poruku (/exit za izlaz): ", out var messageContent);
 
             if (messageContent.ToLower() == "/exit")
                 BackToPrivateChatsMenu(userSender);
@@ -96,8 +104,12 @@ namespace Presentation.MenuOptions
         {
             var usersWithPrivateMessages = PrivateMessagesActions.ShowAllPrivateConversations(user.UserID);
 
-            if (usersWithPrivateMessages is null)
+            if (usersWithPrivateMessages is null || usersWithPrivateMessages.Count < 1)
+            {
+                Console.Clear();
+                Console.WriteLine("\nNemate privatnih poruka! \n");
                 Reader.PressAnyKeyToContinue();
+            }
             else
             {
                 var allUsersItems = new List<(string, Action)>();
@@ -109,6 +121,8 @@ namespace Presentation.MenuOptions
                     (string, Action) line = (u.Username, () => ShowPrivateChatWithUser(user, u));
                     allUsersItems.Add(line);
                 }
+
+
 
 
                 var allUsersMenu = new Menu("Uđite u korisnika kojem želite poslati poruku.", allUsersItems);

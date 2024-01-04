@@ -56,11 +56,13 @@ namespace Presentation.MenuOptions
 
         public List<(string, Action)> UserSettings()
         {
+            var returnToRegularMenu = new LoginForm(true); //auxiliary variable
+
             var options = new List<(string, Action)>()
             {
-                ("Promjena email adrese", () => Console.WriteLine("Work in progress...")),
-                ("Promjena lozinke", () => Console.WriteLine("Work in progress...")),
-                ("Povratak na prethodni Menu", () => Console.WriteLine("Work in progress..."))
+                ("Promjena email adrese", () => ProfileSettings.ChangeMyEmailAddress(User, User.UserID) ),
+                ("Promjena lozinke", () => ProfileSettings.ChangeMyPassword(User, User.UserID) ),
+                ("Povratak na prethodni Menu", () => returnToRegularMenu.OpenRegularMenu(User) )
 
             };
 
