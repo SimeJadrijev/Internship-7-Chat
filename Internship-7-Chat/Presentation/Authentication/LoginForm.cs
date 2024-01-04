@@ -88,7 +88,7 @@ namespace Presentation.Authentication
             {
                 ("Grupni kanali", () =>  new Menu("Grupni kanali", groupChatOptions).Execute()),
                 ("Privatne poruke", () =>  new Menu("Private poruke", privateMessageOptions).Execute()),
-                ("Upravljanje korisničkim profilima", () =>  new Menu("Upravljanje korisničkim profilima", userManagment).Execute()),
+                ("Administratorske pogodnosti", () =>  new Menu("Upravljanje korisničkim profilima", userManagment).Execute()),
                 ("Postavke profila", () =>  new Menu("Postavke profila", userSettings).Execute()),
                 ("Odjava iz profila", () =>  Program.OpenOpeningMenu())
 

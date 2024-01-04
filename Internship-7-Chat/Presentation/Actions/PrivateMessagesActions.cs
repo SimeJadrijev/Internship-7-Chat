@@ -52,5 +52,26 @@ namespace Presentation.Actions
 
             return usersWithPrivateMessages;
         }
+
+        public static int NumberOfSentMessagesTotal()
+        {
+            var number = _privateMessageRepository.NumberOfSentMessagesTotal();
+
+            return number;
+        }
+
+        public static int NumberOfSentMessagesInLastMonth()
+        {
+            var number = _privateMessageRepository.NumberOfSentMessagesInLastMonth();
+
+            return number;
+        }
+
+        public static int NumberOfSentMessagesToday()
+        {
+            var number = _privateMessageRepository.NumberOfSentMessagesToday();
+
+            return number;
+        }
     }
 }

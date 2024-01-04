@@ -45,6 +45,12 @@ namespace Domain.Repositories
             return SaveChanges();
 
         }
+        public int GetNumberOfUsers()
+        {
+            var number = DbContext.Users.Count();
+
+            return number;
+        }
 
         public User? GetById(int id) => DbContext.Users.FirstOrDefault(u => u.UserID == id);
         public User? GetbyEmail(string email) => DbContext.Users.FirstOrDefault(u => u.Email == email);

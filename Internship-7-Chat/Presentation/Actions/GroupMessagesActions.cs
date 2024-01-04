@@ -39,6 +39,27 @@ namespace Presentation.Actions
                 return null;
             }
         }
+
+        public static int NumberOfSentMessagesTotal()
+        {
+            var number = _groupMessageRepository.NumberOfSentMessagesTotal();
+
+            return number;
+        }
+
+        public static int NumberOfSentMessagesInLastMonth()
+        {
+            var number = _groupMessageRepository.NumberOfSentMessagesInLastMonth();
+
+            return number;
+        }
+
+        public static int NumberOfSentMessagesToday()
+        {
+            var number = _groupMessageRepository.NumberOfSentMessagesToday();
+
+            return number;
+        }
     }
 }
 

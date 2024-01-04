@@ -137,5 +137,12 @@ namespace Presentation.Actions
                 return null;
             }
         }
+
+        public static int GetNumberOfUsers()
+        {
+            var number = _userRepository.GetNumberOfUsers();
+
+            return number;
+        }
     }
 }

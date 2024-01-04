@@ -69,6 +69,34 @@ namespace Domain.Repositories
 
             return groupMessages;
         }
+
+        public int NumberOfSentMessagesTotal()
+        {
+            var number = DbContext.GroupMessages.Count();
+            return number;
+        }
+
+        public int NumberOfSentMessagesInLastMonth()
+        {
+            var lastMonth = DateTime.UtcNow.AddMonths(-1);
+
+            var number = DbContext.GroupMessages
+                        .Where(gm => gm.MessageTime >= lastMonth)
+                        .Count();
+
+            return number;
+        }
+
+        public int NumberOfSentMessagesToday()
+        {
+            var today = DateTime.UtcNow.Date;
+
+            var number = DbContext.PrivateMessages
+                    .Where(pm => pm.MessageTime.ToUniversalTime().Date == today)
+                    .Count();
+
+            return number;
+        }
         public GroupMessage? GetById(int id) => DbContext.GroupMessages.FirstOrDefault(gm => gm.GroupMessageID == id);
         public ICollection<GroupMessage> GetAll() => DbContext.GroupMessages.ToList();
     }

@@ -17,6 +17,8 @@ namespace Presentation.MenuOptions
         {
             User = _user;
         }
+        public MenuOptions()
+        { }
 
         public List<(string, Action)> GroupChatOptions()
         {
@@ -50,7 +52,12 @@ namespace Presentation.MenuOptions
 
         public List<(string, Action)> UserManagment()
         {
-            var options = new List<(string, Action)>() { ("Upravljanje korisnicima", () => UserManagementMenu.ShowAllUsers(User) ) };
+            var statsMenu = new Menu("Statistika", Stats());
+            var options = new List<(string, Action)>() 
+            { 
+                ("Upravljanje korisnicima", () => UserManagementMenu.ShowAllUsers(User) ),
+                ("Statistika", () => statsMenu.Execute() )
+            };
             return options;
         }
 
@@ -63,6 +70,22 @@ namespace Presentation.MenuOptions
                 ("Promjena email adrese", () => ProfileSettings.ChangeMyEmailAddress(User, User.UserID) ),
                 ("Promjena lozinke", () => ProfileSettings.ChangeMyPassword(User, User.UserID) ),
                 ("Povratak na prethodni Menu", () => returnToRegularMenu.OpenRegularMenu(User) )
+
+            };
+
+            return options;
+        }
+
+        public List<(string, Action)> Stats()
+        {
+            var returnToRegularMenu = new LoginForm(true); //auxiliary variable
+
+            var options = new List<(string, Action)>()
+            {
+                ("Broj poslanih poruka", () => Presentation.MenuOptions.Stats.NumberOfSentMessages(User) ),
+                ("Prosječni broj poruka po korisniku", () => Presentation.MenuOptions.Stats.AverageNumberOfMessagesPerUser(User) ),
+                ("Prosječni broj poruka po kanalu", () =>  Console.WriteLine() ),
+                ("Povratak na početak", () => returnToRegularMenu.OpenRegularMenu(User) )
 
             };
 

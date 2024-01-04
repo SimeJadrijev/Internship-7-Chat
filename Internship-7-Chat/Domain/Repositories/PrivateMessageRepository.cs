@@ -82,6 +82,34 @@ namespace Domain.Repositories
             return usersWithPrivateMessages;
 
         }
+
+        public int NumberOfSentMessagesTotal ()
+        {
+            var number = DbContext.PrivateMessages.Count();
+            return number;
+        }
+
+        public int NumberOfSentMessagesInLastMonth()
+        {
+            var lastMonth = DateTime.UtcNow.AddMonths(-1);
+
+            var number = DbContext.PrivateMessages
+                        .Where(pm => pm.MessageTime >= lastMonth)
+                        .Count();
+
+            return number;
+        }
+
+        public int NumberOfSentMessagesToday()
+        {
+            var today = DateTime.UtcNow.Date;
+
+            var number = DbContext.PrivateMessages
+                    .Where(pm => pm.MessageTime.ToUniversalTime().Date == today)
+                    .Count();
+
+            return number;
+        }
         public PrivateMessage? GetById(int id) => DbContext.PrivateMessages.FirstOrDefault(pm => pm.PrivateMessageID == id);
         public ICollection<PrivateMessage> GetAll() => DbContext.PrivateMessages.ToList();
     }
