@@ -50,7 +50,7 @@ namespace Presentation.MenuOptions
 
         public List<(string, Action)> UserManagment()
         {
-            var options = new List<(string, Action)>() { ("UserManagament", () => Console.WriteLine("Work in progress...")) };
+            var options = new List<(string, Action)>() { ("Upravljanje korisnicima", () => UserManagementMenu.ShowAllUsers() ) };
             return options;
         }
 

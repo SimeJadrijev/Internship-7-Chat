@@ -42,7 +42,7 @@ namespace Presentation.MenuOptions
                 foreach (var group in newGroups)
                 {
                     var numberOfMembers = GroupsActions.GetNumberOfMembersInGroup(group.GroupID);
-                    Console.WriteLine($"{group.GroupName} --> {numberOfMembers} članova"); //BROJ CLANOVA NE RADI!!!
+                    Console.WriteLine($"{group.GroupName} --> {numberOfMembers} članova"); //BROJ CLANOVA NE RADI
                 }
 
                 Console.WriteLine();
