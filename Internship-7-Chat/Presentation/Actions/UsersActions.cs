@@ -144,5 +144,42 @@ namespace Presentation.Actions
 
             return number;
         }
+
+        public static List<User> TopThreeUsersWithMostSentMessagesTotal()
+        {
+            var number = _userRepository.TopThreeUsersWithMostSentMessagesTotal();
+
+            if (number is null)
+            {
+                Console.WriteLine("U bazi podataka nema nijednog korisnika!");
+                return null;
+            }
+
+            return number;
+        }
+        public static List<User> TopThreeUsersWithMostSentMessagesLastMonth()
+        {
+            var number = _userRepository.TopThreeUsersWithMostSentMessagesLastMonth();
+
+            if (number is null)
+            {
+                Console.WriteLine("U bazi podataka nema nijednog korisnika!");
+                return null;
+            }
+
+            return number;
+        }
+        public static List<User> TopThreeUsersWithMostSentMessagesToday()
+        {
+            var number = _userRepository.TopThreeUsersWithMostSentMessagesToday();
+
+            if (number is null)
+            {
+                Console.WriteLine("U bazi podataka nema nijednog korisnika!");
+                return null;
+            }
+
+            return number;
+        }
     }
 }

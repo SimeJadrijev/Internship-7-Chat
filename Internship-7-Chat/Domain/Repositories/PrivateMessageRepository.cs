@@ -110,6 +110,8 @@ namespace Domain.Repositories
 
             return number;
         }
+
+        
         public PrivateMessage? GetById(int id) => DbContext.PrivateMessages.FirstOrDefault(pm => pm.PrivateMessageID == id);
         public ICollection<PrivateMessage> GetAll() => DbContext.PrivateMessages.ToList();
     }

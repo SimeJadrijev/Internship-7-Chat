@@ -85,6 +85,7 @@ namespace Presentation.MenuOptions
                 ("Broj poslanih poruka", () => Presentation.MenuOptions.Stats.NumberOfSentMessages(User) ),
                 ("Prosječni broj poruka po korisniku", () => Presentation.MenuOptions.Stats.AverageNumberOfMessagesPerUser(User) ),
                 ("Prosječni broj poruka po kanalu", () =>  Console.WriteLine() ),
+                ("Top 3 korisnika s najviše poruka", () =>  Presentation.MenuOptions.Stats.TopThreeUsers(User) ),
                 ("Povratak na početak", () => returnToRegularMenu.OpenRegularMenu(User) )
 
             };

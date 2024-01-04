@@ -63,5 +63,54 @@ namespace Presentation.MenuOptions
 
             ReturnToRegularMenu(user);
         }
+
+        public static void TopThreeUsers(User user)
+        {
+            Console.Clear();
+            Console.WriteLine("--- TOP 3 KORISNIKA S NAJVIŠE PORUKA ---\n");
+
+            var usersTotal = UsersActions.TopThreeUsersWithMostSentMessagesTotal();
+            var usersLastMonth = UsersActions.TopThreeUsersWithMostSentMessagesLastMonth();
+            var usersToday = UsersActions.TopThreeUsersWithMostSentMessagesToday();
+
+
+            Console.WriteLine("\nUKUPNO: \n");
+            if (usersTotal is null)
+                Reader.PressAnyKeyToContinue();
+            else
+            {
+                for (var i = 0; i < usersTotal.Count; i++)
+                    Console.WriteLine(i + 1 + " - " + usersTotal[i].Username);
+
+            }
+
+            // -------------------------------------
+
+            Console.WriteLine("\nU ZADNJIH MJESEC DANA: \n");
+            if (usersLastMonth is null)
+                Reader.PressAnyKeyToContinue();
+            else
+            {
+                for (var i = 0; i < usersLastMonth.Count; i++)
+                    Console.WriteLine(i + 1 + " - " + usersLastMonth[i].Username);
+
+            }
+
+
+            // -------------------------------------
+
+            Console.WriteLine("\nDANAS: \n");
+            if (usersToday is null)
+                Reader.PressAnyKeyToContinue();
+            else
+            {
+                for (var i = 0; i < usersToday.Count; i++)
+                    Console.WriteLine(i + 1 + " - " + usersToday[i].Username);
+
+            }
+
+            Reader.PressAnyKeyToContinue();
+            ReturnToRegularMenu(user);
+        }
     }
 }

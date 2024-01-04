@@ -1,6 +1,7 @@
 ﻿using Data.Entities;
 using Data.Entities.Models;
 using Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,57 @@ namespace Domain.Repositories
 
             return number;
         }
+
+        public List<User>? TopThreeUsersWithMostSentMessagesTotal()
+        {
+            var topUsers = DbContext.Users
+                            .OrderByDescending(u =>
+                                u.SentPrivateMessages.Count + u.SentGroupMessages.Count(gm => gm.UserSenderID == u.UserID))
+                            .Take(3)
+                            .ToList();
+
+            if (topUsers is null)
+                return null;
+
+            return topUsers;
+        }
+
+
+        public List<User>? TopThreeUsersWithMostSentMessagesLastMonth()
+        {
+            var lastMonth = DateTime.UtcNow.AddMonths(-1);
+
+            var topUsers = DbContext.Users
+                            .OrderByDescending(u =>
+                                u.SentPrivateMessages.Count(pm => pm.MessageTime >= lastMonth) +
+                                u.SentGroupMessages.Count(gm => gm.UserSenderID == u.UserID && gm.MessageTime >= lastMonth))
+                            .Take(3)
+                            .ToList();
+
+            if (topUsers is null)
+                return null;
+
+            return topUsers;
+        }
+
+        public List<User>? TopThreeUsersWithMostSentMessagesToday()
+        {
+            var todayUtc = DateTime.Now.ToUniversalTime().Date;
+
+            var topUsers = DbContext.Users
+                .OrderByDescending(u =>
+                    u.SentPrivateMessages.Count(pm => pm.MessageTime.ToUniversalTime().Date == todayUtc) +
+                    u.SentGroupMessages.Count(gm => gm.UserSenderID == u.UserID && gm.MessageTime.ToUniversalTime().Date == todayUtc))
+                .Take(3)
+                .ToList();
+
+
+            if (topUsers is null)
+                return null;
+
+            return topUsers;
+        }
+
 
         public User? GetById(int id) => DbContext.Users.FirstOrDefault(u => u.UserID == id);
         public User? GetbyEmail(string email) => DbContext.Users.FirstOrDefault(u => u.Email == email);
