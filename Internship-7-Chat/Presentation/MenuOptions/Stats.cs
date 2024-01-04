@@ -2,12 +2,6 @@
 using Presentation.Actions;
 using Presentation.Authentication;
 using Presentation.Helpers;
-using Presentation.MenuOptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presentation.MenuOptions
 {
@@ -111,6 +105,19 @@ namespace Presentation.MenuOptions
 
             Reader.PressAnyKeyToContinue();
             ReturnToRegularMenu(user);
+        }
+
+        public static void AverageNumberOfGroupMessages(User user)
+        {
+            Console.Clear();
+            Console.WriteLine("--- PROSJEČNI BROJ PORUKA PO DANU U GRUPNIM KANALIMA ---\n");
+
+            Console.WriteLine("");
+
+            Reader.PressAnyKeyToContinue();
+            ReturnToRegularMenu(user);
+
+
         }
     }
 }

@@ -2,11 +2,6 @@
 using Data.Entities.Models;
 using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
@@ -97,6 +92,7 @@ namespace Domain.Repositories
 
             return number;
         }
+
         public GroupMessage? GetById(int id) => DbContext.GroupMessages.FirstOrDefault(gm => gm.GroupMessageID == id);
         public ICollection<GroupMessage> GetAll() => DbContext.GroupMessages.ToList();
     }
