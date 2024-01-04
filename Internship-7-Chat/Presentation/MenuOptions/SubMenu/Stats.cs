@@ -3,7 +3,7 @@ using Presentation.Actions;
 using Presentation.Authentication;
 using Presentation.Helpers;
 
-namespace Presentation.MenuOptions
+namespace Presentation.MenuOptions.SubMenu
 {
     public class Stats
     {

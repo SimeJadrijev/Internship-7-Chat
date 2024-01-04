@@ -2,7 +2,7 @@
 using Presentation.Actions;
 using Presentation.Helpers;
 
-namespace Presentation.MenuOptions
+namespace Presentation.MenuOptions.SubMenu
 {
     public class ProfileSettings
     {
@@ -28,7 +28,7 @@ namespace Presentation.MenuOptions
             }
         }
 
-        public static void ChangeMyPassword (User userForEdit, int userForEditID)
+        public static void ChangeMyPassword(User userForEdit, int userForEditID)
         {
             Console.Clear();
             Console.WriteLine("--- PROMJENA LOZINKE --- \n");

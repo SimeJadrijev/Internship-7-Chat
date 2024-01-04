@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace Presentation.MenuOptions
+namespace Presentation.MenuOptions.SubMenu
 {
     public class UserManagementMenu
     {
@@ -37,7 +37,7 @@ namespace Presentation.MenuOptions
                     allUsersItems.Add(line);
                 }
 
-                (string, Action) returnLine = ("<-- POVRATAK", () => helpVariable.OpenRegularMenu(user) );
+                (string, Action) returnLine = ("<-- POVRATAK", () => helpVariable.OpenRegularMenu(user));
                 allUsersItems.Add(returnLine);
 
                 var allUsersMenu = new Menu("Uđite u korisnika kojim želite upravljati.", allUsersItems);

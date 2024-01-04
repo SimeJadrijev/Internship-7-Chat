@@ -3,7 +3,7 @@ using Presentation.Actions;
 using Presentation.Authentication;
 using Presentation.Helpers;
 
-namespace Presentation.MenuOptions
+namespace Presentation.MenuOptions.SubMenu
 {
     public class PrivateChatsMenu
     {
@@ -94,7 +94,7 @@ namespace Presentation.MenuOptions
             }
         }
 
-        public static void ShowAllPrivateConversations (User user)
+        public static void ShowAllPrivateConversations(User user)
         {
             var usersWithPrivateMessages = PrivateMessagesActions.ShowAllPrivateConversations(user.UserID);
 

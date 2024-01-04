@@ -3,17 +3,17 @@ using Presentation.Actions;
 using Presentation.Helpers;
 
 
-namespace Presentation.MenuOptions
+namespace Presentation.MenuOptions.SubMenu
 {
     public class GroupChannelMenu
     {
-        public static void CreateGroupChannel (User user)
+        public static void CreateGroupChannel(User user)
         {
             Console.Clear();
             Console.WriteLine("--- KREIRANJE NOVOG GRUPNOG KANALA --- \n");
 
             Reader.ReadInput("Odaberite ime vašeg novog grupnog kanala (/exit za odustajanje): ", out var groupChannelName);
-            
+
             if (groupChannelName.ToLower() != "/exit")
             {
                 var groupID = GroupsActions.CreateGroupChat(groupChannelName, user.UserID);
@@ -25,13 +25,13 @@ namespace Presentation.MenuOptions
 
         }
 
-        public static void JoinGroupChannel (User user)
+        public static void JoinGroupChannel(User user)
         {
             Console.Clear();
             Console.WriteLine("--- ULAZAK U GRUPNI KANAL --- \n");
 
             var newGroups = GroupsActions.GetNewGroups(user);
-            
+
             if (newGroups != null)
             {
                 foreach (var group in newGroups)
@@ -53,7 +53,7 @@ namespace Presentation.MenuOptions
                     BackToGroupChannelMenu(user, true);
 
                 }
-                else   
+                else
                 {
                     GroupUserActions.Add(user.UserID, selectedGroup.GroupID);
                     Reader.PressAnyKeyToContinue();
@@ -88,7 +88,7 @@ namespace Presentation.MenuOptions
                 Reader.TryReadInt("Unesite ID grupe koju želite pregledati (za izlaz unijeti bilo šta drugo): ", out var groupForView);
                 if (groupForView == 0)
                     BackToGroupChannelMenu(user, true);
-                
+
                 var selectedGroup = myGroups.FirstOrDefault(g => g.GroupID == groupForView);
 
                 //Reader.ReadInput("Unesite ime grupnog kanala koji želite pregledati (za izlaz unijeti bilo šta drugo): ", out var groupForView);
