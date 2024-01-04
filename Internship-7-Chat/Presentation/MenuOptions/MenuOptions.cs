@@ -50,7 +50,7 @@ namespace Presentation.MenuOptions
 
         public List<(string, Action)> UserManagment()
         {
-            var options = new List<(string, Action)>() { ("Upravljanje korisnicima", () => UserManagementMenu.ShowAllUsers() ) };
+            var options = new List<(string, Action)>() { ("Upravljanje korisnicima", () => UserManagementMenu.ShowAllUsers(User) ) };
             return options;
         }
 

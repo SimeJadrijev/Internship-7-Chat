@@ -69,5 +69,23 @@ namespace Presentation.Actions
             return allUsers;
 
         }
+
+        public static User? ChangeEmailAddress(User userForEdit, int userID, string newEmailAddress)
+        {
+            userForEdit.Email = newEmailAddress;
+            var responseResult = _userRepository.Update(userForEdit, userID);
+
+            if (responseResult == Domain.Enums.ResponseResultType.Success)
+            {
+                Console.WriteLine("Uspješno izmijenjena email adresa!");
+                return userForEdit;
+            }
+            else
+            {
+                Console.WriteLine("Greška! Korisniku nije promijenjena email adresa!");
+                return null;
+            }
+
+        }
     }
 }
