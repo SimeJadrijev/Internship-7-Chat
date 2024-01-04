@@ -53,7 +53,7 @@ namespace Presentation.MenuOptions
                         {
                             ("Izbriši profil", () => DeleteUserProfile(userMe, userForOperation.UserID) ),
                             ("Izmjena email adrese", () => ChangeEmailAdress(userForOperation, userForOperation.UserID)),
-                            ("Promoviraj u admina", () => Console.WriteLine()),
+                            ("Promoviraj u admina", () => PromoteToAdmin(userForOperation)),
                             ("Povratak na početak", () => helpVariable.OpenRegularMenu(userMe))
                         };
 
@@ -63,6 +63,7 @@ namespace Presentation.MenuOptions
 
         public static void DeleteUserProfile(User userMe, int userForDeleteID)
         {
+            Console.Clear();
             Console.WriteLine("--- BRISANJE KORISNIČKOG PROFILA --- \n");
 
             UsersActions.DeleteUser(userForDeleteID);
@@ -75,12 +76,23 @@ namespace Presentation.MenuOptions
 
         public static void ChangeEmailAdress(User userForEdit, int userForEditID)
         {
+            Console.Clear();
             Console.WriteLine("--- PROMJENA EMAIL ADRESE --- \n");
 
             Console.WriteLine("Trenutna email adresa: " + userForEdit.Email + "\n");
             var newEmailAddress = Reader.ReadEmail("Unesite novu email adresu: ");
 
             var user = UsersActions.ChangeEmailAddress(userForEdit, userForEditID, newEmailAddress);
+
+            Reader.PressAnyKeyToContinue();
+        }
+
+        public static void PromoteToAdmin(User userForPromotion)
+        {
+            Console.Clear();
+            Console.WriteLine("--- PROMOCIJA KORISNIKA U ADMINA --- \n");
+
+            var user = UsersActions.PromoteToAdmin(userForPromotion);
 
             Reader.PressAnyKeyToContinue();
         }

@@ -85,7 +85,31 @@ namespace Presentation.Actions
                 Console.WriteLine("Greška! Korisniku nije promijenjena email adresa!");
                 return null;
             }
+        }
 
+        public static User? PromoteToAdmin(User userForPromotion)
+        {
+            if (userForPromotion.IsAdmin == true)
+            {
+                Console.WriteLine("Korisnik je već admin!");
+                return null;
+            }
+            else
+            {
+                userForPromotion.IsAdmin = true;
+                var responseResult = _userRepository.Update(userForPromotion, userForPromotion.UserID);
+
+                if (responseResult == Domain.Enums.ResponseResultType.Success)
+                {
+                    Console.WriteLine("Korisnik je uspješno promoviran u admina!");
+                    return userForPromotion;
+                }
+                else
+                {
+                    Console.WriteLine("Greška! Korisnik NIJE promoviran u admina!");
+                    return null;
+                }
+            }
         }
     }
 }
